@@ -54,12 +54,96 @@
       font-size: 24px;
       width: 100%;
     }
+    .dialog {
+      position: absolute;
+      margin: auto;
+      padding: 0;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 240px;
+      width: 420px;
+      transform: translateY(-50%);
+      background-color: white;
+      border: solid 2px #ccc;
+      border-radius: 12px;
+    }
+    .dialog-inner {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: 16px 32px;
+      overflow: hidden;
+    }
+    .dialog-scroll {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      overflow: auto;
+
+
+    background:
+      linear-gradient(white 30%, rgba(255,255,255,0)),
+      linear-gradient(rgba(255,255,255,0), white 70%) 0 100%,
+
+      radial-gradient(farthest-side at 50% 0, rgba(0,0,0,.2), rgba(0,0,0,0)),
+      radial-gradient(farthest-side at 50% 100%, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
+
+    background-repeat: no-repeat;
+    background-color: white;
+    background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+
+    /* Opera doesn't support this in the shorthand */
+    background-attachment: local, local, scroll, scroll;
+    }
+    .dialog-button {
+      position: absolute;
+      width: initial;
+      right: 16px;
+      bottom: 16px;
+    }
   </style>
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/monokai-sublime.min.css">
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
 
 </head>
 <body>
+  <div class="dialog" id="dialog">
+    <div class="dialog-inner" >
+      <div class="dialog-scroll">
+        <pre>type User {
+  id: ID!
+  name: String!
+}
+type Document {
+  id: ID!
+  user: ID!
+  title: String!
+  content: String!
+}
+type Image {
+  id: ID!
+  url: String!
+}
+type Tweet {
+  id: ID!
+  user: ID!
+  content: String!
+}
+type Query {
+  users: [User]!
+  documents: [Document]!
+  images: [Image]!
+  tweets: [Tweet]!
+}</pre>
+      </div>
+    </div>
+    <button id="closeBtn" class="dialog-button">close</button>
+  </div>
   <div style="display: flex; justify-content: space-between; align-items: stretch; height: 100%;">
       <div style="display: flex; flex-direction: column; flex: 1;">
         <textarea id="query">query {
@@ -73,19 +157,18 @@
     </div>
     <div style="flex: 1; overflow: scroll;">
       <div style="border: solid 1px black;">
-        <pre><code class="json" id="result"></code></pre>
+        <pre><code class="json hljs" id="result"></code></pre>
       </div>
     </div>
   </div>
   <script>
-    let count = 0;
     async function execute() {
       const response = await fetch("", { method: "post", body: query.value });
       const json = await response.json();
-      result.innerHTML = JSON.stringify(json, "", "  ");
-      hljs.initHighlighting();
+      result.innerHTML = hljs.highlight("json", JSON.stringify(json, "", "  ")).value;
     }
     btn.addEventListener("click", execute);
+    closeBtn.addEventListener("click", () => dialog.style.display = "none")
   </script>
 </body>
 </html>
