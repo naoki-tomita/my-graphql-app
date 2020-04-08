@@ -1,0 +1,16 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@types/graphql": "^14.5.0",
+    "@types/node": "^13.11.0",
+    "graphql": "^15.0.0",
+    "ts-node": "^8.8.2",
+    "typescript": "^3.8.3"
+  },
+  "scripts": {
+    "start": "ts-node index.ts"
+  }
+}
