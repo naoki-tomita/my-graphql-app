@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GraphQL</title>
   <style>
+    html {
+      height: 100%;
+    }
+    body {
+      height: 100%;
+      margin: 0;
+    }
+
     h1 {
       font-family: Consolas, monaco, monospace; font-size: 24px;
       font-style: normal; font-variant: normal; font-weight: 700;
@@ -26,35 +34,56 @@
       line-height: 30px;
     }
     pre {
+      margin: 0;
+      padding: 0;
+    }
+    code {
       font-family: Consolas, monaco, monospace; font-size: 1em;
       font-style: normal; font-variant: normal; font-weight: 400;
       line-height: 1.2em;
     }
     textarea {
+      resize: none;
       font-family: Consolas, monaco, monospace; font-size: 1em;
       font-style: normal; font-variant: normal; font-weight: 400;
       line-height: 1.2em;
       height: 100%;
     }
+    button {
+      height: 32px;
+      font-size: 24px;
+      width: 100%;
+    }
   </style>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/monokai-sublime.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+
 </head>
 <body>
-  <div>
-    <textarea id="query">query {
+  <div style="display: flex; justify-content: space-between; align-items: stretch; height: 100%;">
+      <div style="display: flex; flex-direction: column; flex: 1;">
+        <textarea id="query">query {
   users {
     id
     name
     documents
   }
 }</textarea>
-    <button id="btn">execute</button>
+      <button id="btn">execute</button>
+    </div>
+    <div style="flex: 1; overflow: scroll;">
+      <div style="border: solid 1px black;">
+        <pre><code class="json" id="result"></code></pre>
+      </div>
+    </div>
   </div>
-  <pre id="result"></pre>
   <script>
+    let count = 0;
     async function execute() {
       const response = await fetch("", { method: "post", body: query.value });
       const json = await response.json();
       result.innerHTML = JSON.stringify(json, "", "  ");
+      hljs.initHighlighting();
     }
     btn.addEventListener("click", execute);
   </script>
