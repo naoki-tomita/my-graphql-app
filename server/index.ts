@@ -41,12 +41,12 @@ const datas: any = {
     { name: "ueda" },
   ].map((it, i) => ({ id: i, ...it })),
   documents: [
-    { user: 0, title: "title1", content: "content1", images: [0, 1] },
-    { user: 0, title: "title2", content: "content2", images: [] },
-    { user: 1, title: "title3", content: "content3", images: [2] },
-    { user: 1, title: "title4", content: "content4", images: [1] },
-    { user: 2, title: "title5", content: "content5", images: [1, 2, 3] },
-    { user: 2, title: "title6", content: "content6", images: [] },
+    { user: 0, title: "わたしの日記1", content: "ここに日記本文を書く。", images: [0, 1] },
+    { user: 0, title: "5/3 晴", content: "晴れていた", images: [] },
+    { user: 1, title: "クリスマスイブ♪", content: "イエスキリスト誕生日おめでとー！", images: [2] },
+    { user: 1, title: "今日の晩ご飯", content: "ここに写真を貼る", images: [1] },
+    { user: 2, title: "日記開設！", content: "よろしくお願いします。", images: [1, 2, 3] },
+    { user: 2, title: "日記飽きました", content: "飽きましたので、やめます。", images: [] },
   ]
   .map(((it, i) => ({ id: i, ...it }))),
   images: [
@@ -55,15 +55,15 @@ const datas: any = {
     { url: "/image3.jpg" },
   ].map((it, i) => ({ id: i, ...it })),
   tweets: [
-    { user: 0, content: "1" },
-    { user: 1, content: "2" },
-    { user: 2, content: "3" },
-    { user: 0, content: "4" },
-    { user: 1, content: "5" },
-    { user: 2, content: "6" },
-    { user: 0, content: "7" },
-    { user: 1, content: "8" },
-    { user: 2, content: "9" },
+    { user: 0, content: "こんにちは" },
+    { user: 1, content: "朝だね" },
+    { user: 2, content: "おやすみー。" },
+    { user: 0, content: "昨日はカツ丼を食べた" },
+    { user: 1, content: "ラーメン食べたい" },
+    { user: 2, content: "映画見る" },
+    { user: 0, content: "お酒が好きです。" },
+    { user: 1, content: "ヨーグルトを食べます。" },
+    { user: 2, content: "仕事疲れたなう" },
   ].map((it, i) => ({ id: i, ...it })),
 }
 
@@ -203,5 +203,5 @@ const server = createServer(async (request, response) => {
   }
 });
 
-server.on("listening", () => console.log(`server started on: ${8000}`))
-server.listen(8000);
+server.on("listening", () => console.log(`server started on: ${8001}`))
+server.listen(8001);

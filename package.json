@@ -1,0 +1,13 @@
+{
+  "name": "my-graphql-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:naoki-tomita/my-graphql-app.git",
+  "author": "kojiro.ueda <mxcpy608@hotmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "yarn serve & yarn run:server",
+    "serve": "npx http-server app -p $PORT --proxy http://localhost:8001",
+    "run:server": "cd server && yarn start"
+  }
+}

@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+BUILD_DIR=${1:-}
+CACHE_DIR=${2:-}
+ENV_DIR=${3:-}
+BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
+
+mkdir -p $CACHE_DIR
+source $BUILD_DIR/bin/install.sh
+
+install_nodejs
+npm i -g yarn
+
+cd $BUILD_DIR/server
+yarn

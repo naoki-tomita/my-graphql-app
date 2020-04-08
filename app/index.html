@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GraphQL</title>
+  <style>
+    h1 {
+      font-family: Consolas, monaco, monospace; font-size: 24px;
+      font-style: normal; font-variant: normal; font-weight: 700;
+      line-height: 26.4px;
+    }
+    h3 {
+      font-family: Consolas, monaco, monospace; font-size: 14px;
+      font-style: normal; font-variant: normal; font-weight: 700;
+      line-height: 15.4px;
+    }
+    p {
+      font-family: Consolas, monaco, monospace; font-size: 14px;
+      font-style: normal; font-variant: normal; font-weight: 400;
+      line-height: 20px;
+    }
+    blockquote {
+      font-family: Consolas, monaco, monospace; font-size: 21px;
+      font-style: normal; font-variant: normal; font-weight: 400;
+      line-height: 30px;
+    }
+    pre {
+      font-family: Consolas, monaco, monospace; font-size: 1em;
+      font-style: normal; font-variant: normal; font-weight: 400;
+      line-height: 1.2em;
+    }
+    textarea {
+      font-family: Consolas, monaco, monospace; font-size: 1em;
+      font-style: normal; font-variant: normal; font-weight: 400;
+      line-height: 1.2em;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <textarea id="query">query {
+  users {
+    id
+    name
+    documents
+  }
+}</textarea>
+    <button id="btn">execute</button>
+  </div>
+  <pre id="result"></pre>
+  <script>
+    async function execute() {
+      const response = await fetch("", { method: "post", body: query.value });
+      const json = await response.json();
+      result.innerHTML = JSON.stringify(json, "", "  ");
+    }
+    btn.addEventListener("click", execute);
+  </script>
+</body>
+</html>
